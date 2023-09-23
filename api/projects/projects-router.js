@@ -22,23 +22,35 @@ router.get('/:id', validateProjectId, (req, res) => {
 })
 
 router.post('/', validateProject, (req, res, next) => {
-    Projects.insert({ name: req.name, description: req.description })
+    Projects.insert({ name: req.name, description: req.description, completed: req.completed })
         .then(newProject => {
             res.status(201).json(newProject)
         })
         .catch(next)
 })
 
-router.put('/:id', validateProjectId, (req, res) => {
-
+router.put('/:id', validateProjectId, validateProject, (req, res, next) => {
+    Projects.update(req.params.id, { name: req.name, description: req.description, completed: req.completed })
+        .then(updatedProject => {
+            res.status(200).json(updatedProject)
+        })
+        .catch(next)
 })
 
-router.delete('/:id', validateProjectId, (req, res) => {
-
+router.delete('/:id', validateProjectId, (req, res, next) => {
+    Projects.remove(req.params.id)
+        .then(deletedProject => {
+            res.status(200).json(deletedProject)
+        })
+        .catch(next)
 })
 
-router.get('/:id/actions', validateProjectId, (req, res) => {
-
+router.get('/:id/actions', validateProjectId, (req, res, next) => {
+    Projects.getProjectActions(req.params.id)
+        .then(projectActions => {
+            res.status(200).json(projectActions)
+        })
+        .catch(next)
 })
 
 router.use((err, req, res, next) => {
