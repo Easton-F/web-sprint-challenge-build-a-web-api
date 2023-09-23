@@ -1,7 +1,16 @@
 const express = require('express');
 const server = express();
+const projectsRouter = require('./projects/projects-router');
 
-const PORT = process.env.PORT || 9000
+server.use(express.json())
+
+server.use('/api/projects', projectsRouter);
+
+server.use('/api/hello', (req, res)  => {
+    res.status(404).json({
+        message: 'i am found but not found'
+    })
+})
 
 // Configure your server here
 // Build your actions router in /api/actions/actions-router.js

@@ -3,26 +3,30 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/api/projects', (req, res) => {
+router.get('/', (req, res) => {
+    res.status(404).json({
+        message: 'you found me in api projects!'
+    })
+})
+
+router.get('/:id', (req, res) => {
 
 })
 
-router.get('/api/projects/:id', (req, res) => {
+router.post('/', (req, res) => {
 
 })
 
-router.post('/api/projects', (req, res) => {
+router.put('/:id', (req, res) => {
 
 })
 
-router.put('/api/projects/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
 
 })
 
-router.delete('/api/projects/:id', (req, res) => {
+router.get('/:id/actions', (req, res) => {
 
 })
 
-router.get('/api/projects/:id/actions', (req, res) => {
-    
-})
+module.exports = router;
